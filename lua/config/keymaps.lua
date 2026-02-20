@@ -22,6 +22,9 @@ end, { desc = "Grep" })
 map("n", "gs", function()
   Snacks.picker.lsp_symbols()
 end, { desc = "Go to Symbol" })
+map("n", "gd", function()
+  Snacks.picker.lsp_definitions()
+end, { desc = "Go to definition" })
 
 --------------------------------
 -- '<leader>C' -> Claude
