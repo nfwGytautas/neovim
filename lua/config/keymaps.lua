@@ -62,3 +62,17 @@ map("n", "<leader>dy", function()
     vim.notify("No diagnostic on this line", vim.log.levels.WARN)
   end
 end, { desc = "Copy Diagnostics Message" })
+
+--------------------------------
+-- '<leader>W' -> Workflows
+--------------------------------
+map("n", "<leader>Wg", function()
+  local msg = vim.fn.input("Commit message: ")
+  if msg == "" then
+    vim.notify("No commit message", vim.log.levels.ERROR)
+    return
+  end
+  vim.cmd("Git add -A")
+  vim.cmd("Git commit -m '" .. msg .. "'")
+  vim.cmd("Git push")
+end, { desc = "Git Add, Commit, Push" })

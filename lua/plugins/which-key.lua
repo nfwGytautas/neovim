@@ -5,7 +5,8 @@ return {
       spec = {
         { "<leader>s", group = "search" },
         { "<leader>g", group = "git" },
-        { "<leader>C", group = "Claude", icon = { icon = "🤖", color = "orange" } },
+        { "<leader>C", group = "Claude", icon = { icon = "", color = "orange" } },
+        { "<leader>W", group = "workflows", icon = { icon = "", color = "orange" } },
         { "g", group = "goto" },
       },
     },

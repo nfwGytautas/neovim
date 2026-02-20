@@ -6,4 +6,5 @@ return {
       { "<leader>/", false }, -- remove default grep
     },
   },
+  { "nvim-tree/nvim-web-devicons", lazy = true },
 }
