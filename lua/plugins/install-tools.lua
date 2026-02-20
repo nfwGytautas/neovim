@@ -1,6 +1,16 @@
 -- Automatically install required external tools for LazyVim
 -- Runs once on startup if tools are missing
 
+-- Map of tool binary name -> package name overrides per manager
+-- (most tools have the same name across managers)
+local tools = {
+  { bin = "fd",      pkg = { default = "fd-find", brew = "fd", pacman = "fd", dnf = "fd-find", apk = "fd" } },
+  { bin = "rg",      pkg = { default = "ripgrep" } },
+  { bin = "fzf",     pkg = { default = "fzf" } },
+  { bin = "lazygit", pkg = { default = "lazygit", brew = "lazygit" } },
+  { bin = "tmux",    pkg = { default = "tmux" } },
+}
+
 local function executable(name)
   return vim.fn.executable(name) == 1
 end
@@ -32,15 +42,6 @@ local function detect_installer()
   end
   return nil
 end
-
--- Map of tool binary name -> package name overrides per manager
--- (most tools have the same name across managers)
-local tools = {
-  { bin = "fd",  pkg = { default = "fd-find", brew = "fd", pacman = "fd", dnf = "fd-find", apk = "fd" } },
-  { bin = "rg",  pkg = { default = "ripgrep" } },
-  { bin = "fzf", pkg = { default = "fzf" } },
-  { bin = "lazygit", pkg = { default = "lazygit", brew = "lazygit" } },
-}
 
 local function get_manager_key(install_cmd)
   if install_cmd:match("brew") then return "brew" end

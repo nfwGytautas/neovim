@@ -5,10 +5,49 @@
 local map = vim.keymap.set
 
 --------------------------------
--- 's' -> Search
+-- 'g' -> GoTo
 --------------------------------
-map("n", "<leader>sf", function() Snacks.picker.files() end,                   { desc = "Files" })
-map("n", "<leader>sb", function() Snacks.picker.buffers() end,                 { desc = "Buffers" })
+map("n", "gf", function()
+  Snacks.picker.files()
+end, { desc = "Search File" })
+map("n", "gl", function()
+  local line = vim.fn.input("Go to line: ")
+  if line ~= "" then
+    vim.cmd(line)
+  end
+end, { desc = "Go to Line" })
+map("n", "gg", function()
+  Snacks.picker.grep()
+end, { desc = "Grep" })
+map("n", "gs", function()
+  Snacks.picker.lsp_symbols()
+end, { desc = "Go to Symbol" })
+
+--------------------------------
+-- '<leader>C' -> Claude
+--------------------------------
+map("n", "<leader>C", function()
+  vim.fn.system('tmux select-window -t claude 2>/dev/null || tmux new-window -n claude "claude"')
+end, { desc = "Jump to Claude" })
+
+--------------------------------
+-- '<leader>g' -> Git
+--------------------------------
+map("n", "<leader>gp", function()
+  vim.cmd("Git pull")
+end, { desc = "Git Pull" })
+map("n", "<leader>ga", function()
+  vim.cmd("Git add -A")
+end, { desc = "Git Add All" })
+map("n", "<leader>gc", function()
+  local msg = vim.fn.input("Commit message: ")
+  if msg ~= "" then
+    vim.cmd("Git commit -m '" .. msg .. "'")
+  end
+end, { desc = "Git Commit" })
+map("n", "<leader>gP", function()
+  vim.cmd("Git push")
+end, { desc = "Git Push" })
 
 --------------------------------
 -- 'd' -> Debug
